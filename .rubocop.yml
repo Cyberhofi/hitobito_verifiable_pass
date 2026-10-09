@@ -1,0 +1,28 @@
+inherit_from:
+  - ../hitobito/.rubocop.yml
+
+AllCops:
+  Exclude:
+    - Rakefile
+    - Gemfile
+    - db/**/*
+    - bin/**/*
+    - tmp/**/*
+
+# Prawn drawing code consists of many small drawing calls per element; splitting it only to
+# satisfy the metrics would make the layout code harder to follow.
+Metrics/AbcSize:
+  Exclude:
+    - app/domain/verifiable_pass/pdf/sheet.rb
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - app/domain/verifiable_pass/pdf/sheet.rb
+Metrics/MethodLength:
+  Exclude:
+    - app/domain/verifiable_pass/pdf/sheet.rb
+
+# Rake task definitions are naturally one block
+Metrics/BlockLength:
+  Exclude:
+    - lib/tasks/**/*.rake
+    - spec/**/*

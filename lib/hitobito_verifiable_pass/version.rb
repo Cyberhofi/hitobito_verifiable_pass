@@ -5,5 +5,5 @@
 #  or later. See the LICENSE file at the top-level directory.
 
 module HitobitoVerifiablePass
-  VERSION = "0.1.0"
+  VERSION = "0.1.1"
 end

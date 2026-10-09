@@ -38,14 +38,19 @@ class VerifiablePass::Config
     wrap(@hash[key.to_sym])
   end
 
+  def empty?
+    @hash.empty?
+  end
+
+  # Missing keys return nil like Config::Options, so optional settings can be read directly.
   def method_missing(name, *args)
     return super unless args.empty? && !name.end_with?("=", "?", "!")
 
     self[name]
   end
 
-  def respond_to_missing?(_name, _include_private = false)
-    true
+  def respond_to_missing?(name, include_private = false)
+    @hash.key?(name.to_sym) || super
   end
 
   def template_key

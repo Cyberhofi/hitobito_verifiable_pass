@@ -8,8 +8,8 @@ Rails.application.routes.draw do
   extend LanguageRouteScope
 
   # Public verification page (QR code), no login. Path configurable: verifiable_pass.verify_path
-  get "/#{VerifiablePass.config.verify_path.to_s.delete("/")}/:token" =>
-        "verifiable_pass/verifications#show",
+  get "/#{VerifiablePass.config.verify_path.to_s.delete("/")}/:token",
+    to: "verifiable_pass/verifications#show",
     as: :verifiable_pass_verify,
     constraints: {token: /[A-Za-z0-9_-]{1,64}/}
 

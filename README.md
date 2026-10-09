@@ -142,6 +142,25 @@ Styles live in their own entrypoint `verifiable_pass.css` and use the instance c
 (`$body-background`, `$page-background`). Set `$vp-accent-color` in your wagon's
 `hitobito/customizable/_variables.scss` to change the accent line.
 
+## Development and tests
+
+The specs run against the core test group structure and fixtures
+(`RAILS_USE_TEST_GROUPS`), so no organization wagon is needed. With the core checked out
+next to this wagon:
+
+```bash
+cp ../hitobito/Wagonfile.ci ../hitobito/Wagonfile
+cp ../hitobito/Gemfile.lock Gemfile.lock
+(cd ../hitobito && bundle install && yarn install && RAILS_ENV=test bundle exec rake assets:build)
+bundle install
+SKIP_CSS_BUILD=1 SKIP_JS_BUILD=1 RAILS_ENV=test bundle exec rake db:test:prepare
+bundle exec rspec
+bundle exec rubocop
+```
+
+GitHub Actions runs the same steps on every push and weekly against the latest core
+(`.github/workflows/tests.yml`).
+
 ## Notes on core coupling
 
 The core pass system is new; after core updates, check the verification page, the online

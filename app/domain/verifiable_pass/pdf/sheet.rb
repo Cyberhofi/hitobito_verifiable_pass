@@ -223,22 +223,33 @@ class VerifiablePass::Pdf::Sheet
   def draw_crop_marks
     length = mm(@layout[:crop_mark_length] || 4)
     offset = mm(@layout[:crop_mark_offset] || 1.5)
-    left = grid_left
     top = grid_top
-    right = left + grid_width
     bottom = top - grid_height
+    right = grid_left + grid_width
 
     pdf.stroke_color "000000"
     pdf.line_width 0.25
-    (0...columns).flat_map { |c| x = left + (c * (card_width + gap_x)); [x, x + card_width] }
-      .uniq.each do |x|
-        pdf.stroke_line [x, top + offset], [x, top + offset + length]
-        pdf.stroke_line [x, bottom - offset], [x, bottom - offset - length]
-      end
-    (0...rows).flat_map { |r| y = top - (r * (card_height + gap_y)); [y, y - card_height] }
-      .uniq.each do |y|
-        pdf.stroke_line [left - offset, y], [left - offset - length, y]
-        pdf.stroke_line [right + offset, y], [right + offset + length, y]
-      end
+    vertical_card_edges.each do |x|
+      pdf.stroke_line [x, top + offset], [x, top + offset + length]
+      pdf.stroke_line [x, bottom - offset], [x, bottom - offset - length]
+    end
+    horizontal_card_edges.each do |y|
+      pdf.stroke_line [grid_left - offset, y], [grid_left - offset - length, y]
+      pdf.stroke_line [right + offset, y], [right + offset + length, y]
+    end
+  end
+
+  def vertical_card_edges
+    (0...columns).flat_map do |column|
+      x = grid_left + (column * (card_width + gap_x))
+      [x, x + card_width]
+    end.uniq
+  end
+
+  def horizontal_card_edges
+    (0...rows).flat_map do |row|
+      y = grid_top - (row * (card_height + gap_y))
+      [y, y - card_height]
+    end.uniq
   end
 end
