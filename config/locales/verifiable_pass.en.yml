@@ -6,6 +6,9 @@ en:
   verifiable_pass:
     title: Membership card
     member_number: Member no.
+    print:
+      member_number: "Member no. %{value}"
+      issued: "Issued %{value} · verify via QR code"
     multiselect:
       print: Print membership cards
     card:

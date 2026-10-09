@@ -69,8 +69,9 @@ print:
       # Each side is printed on its own page (front pages, back pages, ...).
       # Element types: background, frame, image, text, line, qr. Positions in mm from the
       # top left corner of the card. Text values: text (static), value (name, list_name,
-      # member_number, organization_name, issued_year) or attribute (any person attribute,
-      # dates are localized); optional format with %{value}; blank: shown when empty.
+      # member_number, organization_name, pass_name, issued_year) or attribute (any person attribute,
+      # dates are localized); optional format with %{value} or i18n (translation key with
+      # %{value}); blank: shown when empty.
       sides:
         card:
           elements:
@@ -79,6 +80,6 @@ print:
             org:    { type: text, x: 22, y: 5.5, font_size: 8.5, style: bold, value: organization_name }
             title:  { type: text, x: 22, y: 11, font_size: 7, value: pass_name }
             name:   { type: text, x: 4, y: 25, width: 54, font_size: 10, style: bold, value: name }
-            number: { type: text, x: 4, y: 33, width: 54, font_size: 7.5, value: member_number, format: "Nr. %{value}", blank: "" }
-            issued: { type: text, x: 4, y: 45, width: 54, font_size: 6.5, lines: 2, value: issued_year, format: "%{value}" }
+            number: { type: text, x: 4, y: 33, width: 54, font_size: 7.5, value: member_number, i18n: verifiable_pass.print.member_number, blank: "" }
+            issued: { type: text, x: 4, y: 45, width: 54, font_size: 6.5, lines: 2, value: issued_year, i18n: verifiable_pass.print.issued }
             qr:     { type: qr, x: 59, y: 26, size: 22 }

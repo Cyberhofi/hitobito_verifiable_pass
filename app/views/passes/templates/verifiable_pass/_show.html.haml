@@ -34,7 +34,7 @@
 - if can?(:regenerate_verifiable_pass, card.person)
   .vp-card-admin
     = action_button(t('regenerate', scope: scope),
-      verifiable_pass_group_person_token_path(@group || card.person.primary_group || Group.root, card.person),
+      group_person_verifiable_pass_token_path(@group || card.person.primary_group || Group.root, card.person),
       :sync,
       method: :post,
       data: { confirm: t('regenerate_confirm', scope: scope) })

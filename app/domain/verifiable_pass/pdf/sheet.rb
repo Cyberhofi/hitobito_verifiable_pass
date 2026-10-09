@@ -126,6 +126,7 @@ class VerifiablePass::Pdf::Sheet
     end
     value = I18n.l(value) if value.is_a?(Date)
     return (element[:blank] || "–").to_s if value.blank?
+    return I18n.t(element[:i18n], value: value) if element[:i18n]
 
     element[:format] ? format(element[:format].to_s, value: value) : value.to_s
   end

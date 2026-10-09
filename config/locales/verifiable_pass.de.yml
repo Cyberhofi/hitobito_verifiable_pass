@@ -6,6 +6,9 @@ de:
   verifiable_pass:
     title: Mitgliedsausweis
     member_number: Mitgliedsnr.
+    print:
+      member_number: "Mitgliedsnr. %{value}"
+      issued: "Ausgestellt %{value} · Prüfung per QR-Code"
     multiselect:
       print: Ausweise drucken
     card:

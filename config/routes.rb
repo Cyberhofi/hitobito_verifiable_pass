@@ -15,11 +15,11 @@ Rails.application.routes.draw do
 
   language_scope do
     resources :groups, only: [] do
-      scope module: "verifiable_pass", as: "verifiable_pass" do
-        resource :print, only: [:create]
+      scope module: "verifiable_pass" do
+        resource :verifiable_pass_print, only: [:create], controller: "prints"
 
         resources :people, only: [] do
-          resource :token, only: [:create]
+          resource :verifiable_pass_token, only: [:create], controller: "tokens"
         end
       end
     end
