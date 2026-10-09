@@ -1,0 +1,25 @@
+-#  Copyright (c) 2026, Stefan Hofmann. This file is part of
+-#  hitobito_verifiable_pass and licensed under the Affero General Public License version 3
+-#  or later. See the LICENSE file at the top-level directory.
+
+-# Standalone, lightweight page without the app layout: almost always opened on a phone
+-# after scanning the QR code.
+!!! 5
+%html{lang: I18n.locale}
+  %head
+    %meta{charset: 'utf-8'}
+    %meta{name: 'viewport', content: 'width=device-width, initial-scale=1'}
+    %meta{name: 'robots', content: 'noindex, nofollow'}
+    %meta{name: 'referrer', content: 'no-referrer'}
+    %title= "#{VerifiablePass.config.organization_name} – #{t('verifiable_pass.verifications.show.title')}"
+    = wagon_favicon_tag 'favicon.ico'
+    = stylesheet_link_tag 'verifiable_pass'
+  %body.vp-verify-body
+    .vp-verify
+      .vp-verify-header
+        = wagon_image_tag(VerifiablePass.config.logo, alt: '')
+        %div
+          .vp-verify-org= VerifiablePass.config.organization_name
+          .vp-verify-sub= t('verifiable_pass.verifications.show.title')
+      .vp-verify-content
+        = yield

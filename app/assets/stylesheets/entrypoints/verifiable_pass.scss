@@ -1,0 +1,234 @@
+//  Copyright (c) 2026, Stefan Hofmann. This file is part of
+//  hitobito_verifiable_pass and licensed under the Affero General Public License version 3
+//  or later. See the LICENSE file at the top-level directory.
+
+// Styles for the online card and the public verification page. Colors follow the
+// active instance: header uses $body-background, the accent line $vp-accent-color
+// (define it in your wagon's hitobito/customizable/_variables.scss to change it).
+
+@import "hitobito/customizable/variables";
+
+$vp-accent-color: $green !default;
+$vp-valid-color: #1b7a2b !default;
+$vp-invalid-color: #b3141d !default;
+$vp-warning-color: #8a4b00 !default;
+$vp-warning-border: #c77700 !default;
+
+// Shared state boxes
+
+.vp-state {
+  border-radius: 12px;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  color: #fff;
+  margin-bottom: 1.25rem;
+}
+
+.vp-state-compact {
+  margin: 1rem 0;
+  padding: 0.6rem;
+  border-radius: 10px;
+}
+
+.vp-state-valid {
+  background: $vp-valid-color;
+}
+
+.vp-state-invalid {
+  background: $vp-invalid-color;
+}
+
+.vp-state-icon {
+  font-size: 3.5rem;
+  line-height: 1;
+  font-weight: bold;
+}
+
+.vp-state-label {
+  font-size: 1.4rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.vp-state:not(.vp-state-compact) .vp-state-label {
+  font-size: 2rem;
+  margin-top: 0.5rem;
+}
+
+.vp-status {
+  margin: 0 0 1rem;
+  padding: 0.6rem 0.9rem;
+  border: 3px solid;
+  border-radius: 10px;
+  font-size: 1.15rem;
+  font-weight: bold;
+}
+
+.vp-status-icon {
+  display: inline-block;
+  width: 1.5rem;
+  text-align: center;
+}
+
+.vp-status-ok {
+  color: $vp-valid-color;
+  border-color: $vp-valid-color;
+  background: #eaf5ec;
+}
+
+.vp-status-warning {
+  color: $vp-warning-color;
+  border-color: $vp-warning-border;
+  background: #fff4e0;
+}
+
+// Public verification page
+
+.vp-verify-body {
+  margin: 0;
+  font-family: "Noto Sans", Arial, Helvetica, sans-serif;
+  background: $page-background;
+  color: #222;
+}
+
+.vp-verify {
+  max-width: 28rem;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+.vp-verify-header {
+  background: $body-background;
+  color: #fff;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-bottom: 4px solid $vp-accent-color;
+
+  img {
+    width: 56px;
+    height: 56px;
+    flex: none;
+  }
+}
+
+.vp-verify-org {
+  font-size: 1.15rem;
+  font-weight: bold;
+  line-height: 1.25;
+}
+
+.vp-verify-sub {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.vp-verify-content {
+  padding: 1.25rem 1rem 2rem;
+  flex: 1;
+}
+
+.vp-person {
+  margin-bottom: 1.25rem;
+}
+
+.vp-person-name {
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-bottom: 0.4rem;
+}
+
+.vp-person-number {
+  font-size: 1.15rem;
+}
+
+.vp-hint {
+  font-size: 1.05rem;
+  line-height: 1.45;
+}
+
+.vp-checked {
+  margin-top: 1.5rem;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+// Online card ("my pass")
+
+.vp-card {
+  max-width: 24rem;
+  margin: 0 auto 1.5rem;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  color: #222;
+}
+
+.vp-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: $body-background;
+  border-bottom: 5px solid $vp-accent-color;
+  color: #fff;
+}
+
+.vp-card-logo {
+  width: 64px;
+  height: 64px;
+  flex: none;
+}
+
+.vp-card-org {
+  font-size: 1.2rem;
+  font-weight: bold;
+  line-height: 1.25;
+}
+
+.vp-card-title {
+  font-size: 1rem;
+}
+
+.vp-card-body {
+  padding: 1.25rem 1rem 1.5rem;
+  text-align: center;
+}
+
+.vp-card-name {
+  font-size: 1.7rem;
+  font-weight: bold;
+  line-height: 1.2;
+}
+
+.vp-card-number {
+  margin-top: 0.4rem;
+  font-size: 1.15rem;
+
+  span {
+    margin-right: 0.35rem;
+  }
+}
+
+.vp-card-qr svg {
+  width: 100%;
+  max-width: 15rem;
+  height: auto;
+  background: #fff;
+}
+
+.vp-card-hint {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.vp-card-admin {
+  text-align: center;
+  margin-bottom: 2rem;
+}

@@ -1,0 +1,40 @@
+-#  Copyright (c) 2026, Stefan Hofmann. This file is part of
+-#  hitobito_verifiable_pass and licensed under the Affero General Public License version 3
+-#  or later. See the LICENSE file at the top-level directory.
+
+-# Online pass ("my pass"), portrait format to show on a phone.
+- content_for(:head) { stylesheet_link_tag('verifiable_pass') }
+- card = VerifiablePass::Card.new(@pass.object)
+- valid = card.valid?
+- scope = 'verifiable_pass.card'
+
+.vp-card
+  .vp-card-header
+    = wagon_image_tag(VerifiablePass.config.logo, alt: '', class: 'vp-card-logo')
+    %div
+      .vp-card-org= card.organization_name
+      .vp-card-title= card.pass_name
+
+  .vp-card-body
+    .vp-card-name= card.name
+    - if card.member_number
+      .vp-card-number
+        %span= "#{VerifiablePass.config.member_number_label}:"
+        %strong= card.member_number
+
+    .vp-state.vp-state-compact{class: valid ? 'vp-state-valid' : 'vp-state-invalid'}
+      .vp-state-label= t(valid ? 'valid' : 'invalid', scope: scope)
+
+    = render 'verifiable_pass/statuses', statuses: card.statuses
+
+    .vp-card-qr
+      = card.qr_code.as_svg(module_size: 6, standalone: true, use_path: true, viewbox: true).html_safe
+    .vp-card-hint= t('qr_hint', scope: scope)
+
+- if can?(:regenerate_verifiable_pass, card.person)
+  .vp-card-admin
+    = action_button(t('regenerate', scope: scope),
+      verifiable_pass_group_person_token_path(@group || card.person.primary_group || Group.root, card.person),
+      :sync,
+      method: :post,
+      data: { confirm: t('regenerate_confirm', scope: scope) })

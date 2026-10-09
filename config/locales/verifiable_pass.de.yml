@@ -1,0 +1,32 @@
+#  Copyright (c) 2026, Stefan Hofmann. This file is part of
+#  hitobito_verifiable_pass and licensed under the Affero General Public License version 3
+#  or later. See the LICENSE file at the top-level directory.
+
+de:
+  verifiable_pass:
+    title: Mitgliedsausweis
+    member_number: Mitgliedsnr.
+    multiselect:
+      print: Ausweise drucken
+    card:
+      valid: Ausweis gültig
+      invalid: Ausweis nicht gültig
+      qr_hint: Zum Prüfen den QR-Code scannen.
+      regenerate: QR-Code neu erzeugen
+      regenerate_confirm: >-
+        Neuen QR-Code erzeugen? Der bisherige QR-Code und bereits gedruckte Ausweise
+        dieser Person werden damit ungültig.
+    verifications:
+      show:
+        title: Ausweisprüfung
+        valid: Ausweis gültig
+        invalid: nicht gültig
+        invalid_hint: >-
+          Dieser Ausweis ist derzeit nicht gültig. Bei Fragen bitte an %{organization}
+          wenden.
+        checked_at: "Geprüft am %{time}"
+      rate_limited: Zu viele Prüfungen in kurzer Zeit. Bitte in einer Minute erneut versuchen.
+    tokens:
+      create:
+        success: Neuer QR-Code erzeugt. Der bisherige QR-Code ist ab sofort ungültig.
+        no_pass: Diese Person hat keinen Ausweis (keine berechtigende Rolle).

@@ -1,0 +1,84 @@
+#  Copyright (c) 2026, Stefan Hofmann. This file is part of
+#  hitobito_verifiable_pass and licensed under the Affero General Public License version 3
+#  or later. See the LICENSE file at the top-level directory.
+#
+# Defaults for hitobito_verifiable_pass. Override any of these values in the settings.yml
+# of your organization wagon under the key `verifiable_pass:`. Hashes are merged deeply,
+# so you only need to specify what differs.
+
+# template_key of the core PassDefinition that acts as the verifiable pass
+template_key: verifiable_pass
+
+# Public verification page: https://<host>/<verify_path>/<token>
+verify_path: pass
+verify_rate_limit_per_minute: 30
+
+# Shown on the verification page, the online card and the print sheet.
+# Empty: Settings.application.name
+organization_name:
+# Image in app/assets/images of any wagon. Empty: Settings.application.logo.image
+logo:
+
+# Person attribute used as member number. Empty: no member number is shown.
+member_number_attribute:
+# Label for the member number. Empty: translation verifiable_pass.member_number
+member_number_label:
+
+# Optional configurable validity rule on top of the active role (variant 1).
+# Example: { attribute: membership_fee_paid_until, minimum: current_year }
+# minimum: current_year (integer attribute) or today (date attribute)
+# For anything more complex, register a rule in your wagon (variant 2):
+#   VerifiablePass.register_validity_rule(:key) { |card, date| ... }
+validity:
+  attribute:
+  minimum: current_year
+
+# Used by `rake verifiable_pass:setup`
+setup:
+  name: Membership card
+  background_color: "#ffffff"
+  # Images in app/assets/images of any wagon (PNG/JPEG). Square icon, landscape banner.
+  logo_icon:
+  logo_banner:
+  # Role classes that grant a pass; subclasses are included. Example: [Role::Member]
+  eligible_role_types: []
+
+print:
+  layout: default
+  filename: passes
+  layouts:
+    # Single-sided, 10 cards (85.6 x 54 mm) per A4 page, crop marks
+    default:
+      page_size: A4
+      font: LiberationSans
+      columns: 2
+      rows: 5
+      # Top left corner of the first card in mm. Empty: grid is centered on the page.
+      origin_x:
+      origin_y:
+      card_width: 85.6
+      card_height: 54.0
+      gap_x: 0
+      gap_y: 0
+      crop_marks: true
+      crop_mark_length: 4
+      crop_mark_offset: 1.5
+      # Duplex printing over the long edge: mirror columns on every back side
+      duplex_mirror_columns: false
+      text_color: "222222"
+      # Each side is printed on its own page (front pages, back pages, ...).
+      # Element types: background, frame, image, text, line, qr. Positions in mm from the
+      # top left corner of the card. Text values: text (static), value (name, list_name,
+      # member_number, organization_name, issued_year) or attribute (any person attribute,
+      # dates are localized); optional format with %{value}; blank: shown when empty.
+      sides:
+        card:
+          elements:
+            frame:  { type: frame, inset: 0, radius: 0, width: 0.3, color: "BBBBBB" }
+            logo:   { type: image, x: 4, y: 4, size: 15 }
+            org:    { type: text, x: 22, y: 5.5, font_size: 8.5, style: bold, value: organization_name }
+            title:  { type: text, x: 22, y: 11, font_size: 7, value: pass_name }
+            name:   { type: text, x: 4, y: 25, width: 54, font_size: 10, style: bold, value: name }
+            number: { type: text, x: 4, y: 33, width: 54, font_size: 7.5, value: member_number, format: "Nr. %{value}", blank: "" }
+            issued: { type: text, x: 4, y: 45, width: 54, font_size: 6.5, lines: 2, value: issued_year, format: "%{value}" }
+            qr:     { type: qr, x: 59, y: 26, size: 22 }

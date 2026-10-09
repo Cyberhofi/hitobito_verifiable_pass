@@ -1,0 +1,25 @@
+-#  Copyright (c) 2026, Stefan Hofmann. This file is part of
+-#  hitobito_verifiable_pass and licensed under the Affero General Public License version 3
+-#  or later. See the LICENSE file at the top-level directory.
+
+- scope = 'verifiable_pass.verifications.show'
+= render layout: 'verifiable_pass/verifications/page' do
+  - if @valid
+    .vp-state.vp-state-valid
+      .vp-state-icon ✓
+      .vp-state-label= t('valid', scope: scope)
+    .vp-person
+      .vp-person-name= @card.name
+      - if @card.member_number
+        .vp-person-number
+          = "#{VerifiablePass.config.member_number_label}:"
+          %strong= @card.member_number
+    = render 'verifiable_pass/statuses', statuses: @card.statuses(@checked_at.to_date)
+  - else
+    .vp-state.vp-state-invalid
+      .vp-state-icon ✕
+      .vp-state-label= t('invalid', scope: scope)
+    %p.vp-hint= t('invalid_hint', scope: scope, organization: VerifiablePass.config.organization_name)
+
+  .vp-checked
+    = t('checked_at', scope: scope, time: l(@checked_at, format: :long))

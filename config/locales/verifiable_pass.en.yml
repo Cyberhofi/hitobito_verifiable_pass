@@ -1,0 +1,30 @@
+#  Copyright (c) 2026, Stefan Hofmann. This file is part of
+#  hitobito_verifiable_pass and licensed under the Affero General Public License version 3
+#  or later. See the LICENSE file at the top-level directory.
+
+en:
+  verifiable_pass:
+    title: Membership card
+    member_number: Member no.
+    multiselect:
+      print: Print membership cards
+    card:
+      valid: Card valid
+      invalid: Card not valid
+      qr_hint: Scan the QR code to verify.
+      regenerate: Create new QR code
+      regenerate_confirm: >-
+        Create a new QR code? The current QR code and already printed cards of this person
+        will become invalid.
+    verifications:
+      show:
+        title: Card verification
+        valid: Card valid
+        invalid: not valid
+        invalid_hint: This card is currently not valid. For questions please contact %{organization}.
+        checked_at: "Checked on %{time}"
+      rate_limited: Too many checks in a short time. Please try again in a minute.
+    tokens:
+      create:
+        success: New QR code created. The previous QR code is no longer valid.
+        no_pass: This person has no membership card (no granting role).

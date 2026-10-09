@@ -1,0 +1,9 @@
+-#  Copyright (c) 2026, Stefan Hofmann. This file is part of
+-#  hitobito_verifiable_pass and licensed under the Affero General Public License version 3
+-#  or later. See the LICENSE file at the top-level directory.
+
+-# Reached through the core route /passes/verify/:token: redirect to the verifiable pass
+-# page so the same rules and the same display apply everywhere.
+- url = VerifiablePass::Card.verify_url(@pass.verify_token)
+%meta{'http-equiv': 'refresh', content: "0; url=#{url}"}
+%p= link_to t('verifiable_pass.title'), url

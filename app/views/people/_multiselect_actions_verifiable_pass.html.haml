@@ -1,0 +1,9 @@
+-#  Copyright (c) 2026, Stefan Hofmann. This file is part of
+-#  hitobito_verifiable_pass and licensed under the Affero General Public License version 3
+-#  or later. See the LICENSE file at the top-level directory.
+
+- if can?(:print_verifiable_passes, @group)
+  = action_button(t('verifiable_pass.multiselect.print'),
+    group_verifiable_pass_print_path(@group),
+    :'id-card',
+    data: { checkable: true, method: :post })
